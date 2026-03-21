@@ -1,0 +1,220 @@
+/* ========== RESET GLOBAL ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(145deg, #f4f9ff 0%, #eef2f8 100%);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* ========== LOGIN PAGE – FULL SCREEN ========== */
+.innovation-system {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #f4f9ff 0%, #eef2f8 100%);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* Painel esquerdo (imagem) */
+.left-panel {
+  flex: 2.5;
+  background: radial-gradient(circle at 10% 30%, #0B2B40, #041F2C);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.left-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Painel direito (formulário) */
+.right-panel {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Card do formulário */
+.login-card {
+  max-width: 500px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-image {
+  max-width: 80%;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
+  transform: translateY(-25px);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: -10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c4b66;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-group input {
+  padding: 1rem 1.2rem;
+  border: 1px solid #dfe8f0;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+  background: #fbfdff;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #2f86b0;
+  box-shadow: 0 0 0 3px rgba(47, 134, 176, 0.1);
+}
+
+.btn-entrar {
+  background: #146b9e;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 0.5rem;
+}
+
+.btn-entrar:hover {
+  background: #0f557f;
+}
+
+.btn-entrar:active {
+  transform: scale(0.98);
+}
+
+.btn-entrar:disabled {
+  background: #9bb7cc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #d73a49;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  background: #ffeef0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fcc;
+}
+
+.login-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.login-links a {
+  font-size: 0.9rem;
+  color: #146b9e;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.login-links a:hover {
+  color: #0c4a6e;
+  text-decoration: underline;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  .left-panel,
+  .right-panel {
+    min-height: 50vh;
+  }
+  .right-panel {
+    padding: 2rem 1.5rem;
+  }
+  .logo-image {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 680px) {
+  .login-card {
+    padding: 1.5rem;
+  }
+  .logo-image {
+    max-height: 70px;
+    transform: translateY(0);
+  }
+  .input-group input {
+    padding: 0.8rem;
+  }
+  .btn-entrar {
+    padding: 0.8rem;
+  }
+}

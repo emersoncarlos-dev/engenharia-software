@@ -1,0 +1,351 @@
+.dashboard {
+  min-height: 100vh;
+  background: #f5f7fa;
+  font-family: 'Inter', sans-serif;
+}
+
+.dashboard-header {
+  background: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.logo-area .institution {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #146b9e;
+}
+
+.dashboard-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.dashboard-nav a {
+  text-decoration: none;
+  color: #2c4b66;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.dashboard-nav a:hover {
+  color: #146b9e;
+}
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.welcome-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.course-info h2 {
+  font-size: 1.5rem;
+  color: #0c2e42;
+  margin: 0;
+}
+
+.user-greeting {
+  text-align: right;
+}
+
+.user-greeting p {
+  margin: 0.25rem 0;
+  color: #4a6a82;
+}
+
+.tour-button {
+  background: #146b9e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tour-button:hover {
+  background: #0f557f;
+}
+
+.periods {
+  display: flex;
+  gap: 11.3rem;
+  flex-wrap: wrap;
+}
+
+.period {
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  color: #2c4b66;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.period:hover {
+  border-color: #146b9e;
+  color: #146b9e;
+}
+
+.period.active {
+  background: #146b9e;
+  color: white;
+  border-color: #146b9e;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  .dashboard-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .user-greeting {
+    text-align: center;
+  }
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  height: 35px;      /* ajuste conforme necessário */
+  width: auto;
+  object-fit: contain;
+}
+
+.institution {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #146b9e;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 2rem;   /* aumenta o espaço entre logo e menu */
+}
+
+.user-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f8fafc;
+  border-radius: 2rem;
+  transition: background 0.2s;
+}
+
+.user-info:hover {
+  background: #eef2f9;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #2c4b66;
+  font-size: 0.9rem;
+}
+
+.user-id {
+  font-size: 0.8rem;
+  color: #6b89a0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  color: #6b89a0;
+  transition: transform 0.2s;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #2c4b66;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f1f5f9;
+}
+
+/* Ajuste no header para posicionar o user-menu à direita */
+.dashboard-header {
+  background: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+}
+
+/* Menu do usuário */
+.user-menu {
+  position: relative;
+  margin-left: auto;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+  color: #2c4b66;
+}
+
+.user-button:hover {
+  background: #f0f4fa;
+}
+
+.user-icon {
+  font-size: 1.5rem;
+  color: #146b9e;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+.chevron {
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+}
+
+.chevron.rotate {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 220px;
+  padding: 0.75rem 0;
+  z-index: 100;
+  border: 1px solid #e2e8f0;
+}
+
+.user-info {
+  padding: 0.5rem 1rem;
+}
+
+.user-info p {
+  margin: 0.25rem 0;
+}
+
+.user-info .matricula {
+  font-size: 0.8rem;
+  color: #6b89a0;
+}
+
+.dropdown-menu hr {
+  margin: 0.5rem 0;
+  border-color: #e2e8f0;
+}
+
+.logout-button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #2c4b66;
+  transition: background 0.2s;
+}
+
+.logout-button:hover {
+  background: #f8fafd;
+  color: #146b9e;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .user-menu {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  .dashboard-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
