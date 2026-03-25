@@ -503,3 +503,28 @@
     flex-direction: column;
   }
 }
+
+.status-badge {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+.status-badge.approved {
+  background: #d4edda;
+  color: #155724;
+}
+.status-badge.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

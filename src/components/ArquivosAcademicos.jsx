@@ -6,7 +6,6 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
 
-// Função auxiliar para obter o tamanho do arquivo formatado
 function formatFileSize(bytes) {
   if (!bytes) return '';
   const units = ['B', 'KB', 'MB', 'GB'];
@@ -19,7 +18,6 @@ function formatFileSize(bytes) {
   return `${size.toFixed(1)} ${units[unitIndex]}`;
 }
 
-// Função para obter um ícone representativo baseado no tipo de arquivo
 function getFileIcon(file) {
   if (!file) return '📄';
   const ext = file.name.split('.').pop().toLowerCase();
@@ -43,27 +41,22 @@ function ArquivosAcademicos() {
     matricula: '01131724',
   };
 
-  // Estado para formações
   const [formations, setFormations] = useState([]);
   const [showFormationModal, setShowFormationModal] = useState(false);
   const [newFormationName, setNewFormationName] = useState('');
-
-  // Estado para repositórios
   const [repositorios, setRepositorios] = useState([]);
   const [form, setForm] = useState({
     titulo: '',
     descricao: '',
     visibilidade: 'privado',
     formationId: '',
-    arquivo: null,      // { name, type, size, dataURL }
-    arquivoFile: null,  // arquivo original (File) para envio ao backend
+    arquivo: null,
+    arquivoFile: null,
   });
 
-  // Carregar dados do localStorage
   useEffect(() => {
     const storedRepos = localStorage.getItem('repositorios');
     if (storedRepos) setRepositorios(JSON.parse(storedRepos));
-
     const storedFormations = localStorage.getItem('formacoes');
     if (storedFormations) {
       setFormations(JSON.parse(storedFormations));
@@ -77,7 +70,6 @@ function ArquivosAcademicos() {
     }
   }, []);
 
-  // Salvar repositórios e formações no localStorage quando mudarem
   useEffect(() => {
     localStorage.setItem('repositorios', JSON.stringify(repositorios));
   }, [repositorios]);
@@ -86,7 +78,6 @@ function ArquivosAcademicos() {
     localStorage.setItem('formacoes', JSON.stringify(formations));
   }, [formations]);
 
-  // Manipular seleção de arquivo
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) {
@@ -98,7 +89,6 @@ function ArquivosAcademicos() {
       e.target.value = '';
       return;
     }
-
     const reader = new FileReader();
     reader.onload = (ev) => {
       setForm({
@@ -109,40 +99,18 @@ function ArquivosAcademicos() {
           size: file.size,
           dataURL: ev.target.result,
         },
-        arquivoFile: file, // guarda o arquivo original para possível envio ao backend
+        arquivoFile: file,
       });
     };
     reader.readAsDataURL(file);
   };
 
-  // Enviar novo repositório
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.titulo.trim() || !form.formationId) {
       alert('Preencha o título e selecione uma formação.');
       return;
     }
-
-    // ----- MODERAÇÃO COM IA (exemplo) -----
-    // Se houver arquivo, envie para o backend antes de salvar.
-    // if (form.arquivoFile) {
-    //   const formData = new FormData();
-    //   formData.append('file', form.arquivoFile);
-    //   try {
-    //     const response = await fetch('http://localhost:5000/api/upload', {
-    //       method: 'POST',
-    //       body: formData,
-    //     });
-    //     const data = await response.json();
-    //     if (!response.ok) {
-    //       alert(data.error || 'Arquivo bloqueado por conteúdo impróprio.');
-    //       return;
-    //     }
-    //   } catch (err) {
-    //     alert('Erro ao verificar arquivo. Tente novamente.');
-    //     return;
-    //   }
-    // }
 
     const novo = {
       id: generateId(),
@@ -152,12 +120,11 @@ function ArquivosAcademicos() {
       titulo: form.titulo,
       descricao: form.descricao,
       visibilidade: form.visibilidade,
+      status: 'pending',          // aguardando aprovação do coordenador
       createdAt: new Date().toISOString(),
       arquivo: form.arquivo || null,
     };
     setRepositorios([novo, ...repositorios]);
-
-    // Limpar formulário
     setForm({
       titulo: '',
       descricao: '',
@@ -166,12 +133,10 @@ function ArquivosAcademicos() {
       arquivo: null,
       arquivoFile: null,
     });
-    // Reset do input file
-    const fileInput = document.getElementById('file-input');
-    if (fileInput) fileInput.value = '';
+    document.getElementById('file-input').value = '';
+    alert('Repositório enviado para aprovação do coordenador.');
   };
 
-  // Adicionar nova formação
   const addFormation = () => {
     if (!newFormationName.trim()) return;
     const newFormation = {
@@ -183,7 +148,6 @@ function ArquivosAcademicos() {
     setShowFormationModal(false);
   };
 
-  // Alternar visibilidade
   const toggleVisibilidade = (id) => {
     setRepositorios(prev =>
       prev.map(repo =>
@@ -194,12 +158,11 @@ function ArquivosAcademicos() {
     );
   };
 
-  // Excluir repositório
   const deleteRepositorio = (id) => {
     setRepositorios(prev => prev.filter(repo => repo.id !== id));
   };
 
-  // Filtrar meus repositórios
+  // Filtros para meus repositórios
   let meusRepos = repositorios.filter(repo => repo.userId === user.matricula);
   if (visibilityFilter !== 'todos') {
     meusRepos = meusRepos.filter(repo => repo.visibilidade === visibilityFilter);
@@ -215,9 +178,11 @@ function ArquivosAcademicos() {
     );
   }
 
-  // Repositórios públicos de outras pessoas
+  // Repositórios públicos de outras turmas: só os aprovados
   let outrosReposPublicos = repositorios.filter(
-    repo => repo.userId !== user.matricula && repo.visibilidade === 'publico'
+    repo => repo.userId !== user.matricula
+      && repo.visibilidade === 'publico'
+      && repo.status === 'approved'
   );
   if (selectedFormation) {
     outrosReposPublicos = outrosReposPublicos.filter(repo => repo.formationId === selectedFormation);
@@ -231,10 +196,16 @@ function ArquivosAcademicos() {
     );
   }
 
-  // Obter nome da formação a partir do ID
   const getFormationName = (formationId) => {
     const formation = formations.find(f => f.id === formationId);
     return formation ? formation.name : 'Formação não especificada';
+  };
+
+  const getStatusBadge = (status) => {
+    if (status === 'pending') return <span className="status-badge pending">⏳ Pendente</span>;
+    if (status === 'approved') return <span className="status-badge approved">✅ Aprovado</span>;
+    if (status === 'rejected') return <span className="status-badge rejected">❌ Rejeitado</span>;
+    return null;
   };
 
   return (
@@ -287,7 +258,7 @@ function ArquivosAcademicos() {
           <div className="tab-content">
             <div className="upload-card">
               <form className="upload-form" onSubmit={handleSubmit}>
-                <h3>Criar novo repositório</h3>
+                <h3>Criar novo repositório (aguarda aprovação)</h3>
                 <input
                   type="text"
                   placeholder="Título"
@@ -329,7 +300,7 @@ function ArquivosAcademicos() {
                       checked={form.visibilidade === 'publico'}
                       onChange={() => setForm({ ...form, visibilidade: 'publico' })}
                     />
-                    Público (qualquer pessoa pode ver)
+                    Público (aparecerá após aprovação)
                   </label>
                 </div>
                 <div className="file-input-group">
@@ -343,7 +314,7 @@ function ArquivosAcademicos() {
                     </div>
                   )}
                 </div>
-                <button type="submit" className="btn-submit">Criar repositório</button>
+                <button type="submit" className="btn-submit">Enviar para aprovação</button>
               </form>
             </div>
 
@@ -380,9 +351,12 @@ function ArquivosAcademicos() {
                   <div key={repo.id} className="repo-card">
                     <div className="repo-header">
                       <h3>{repo.titulo}</h3>
-                      <span className={`visibility-badge ${repo.visibilidade}`}>
-                        {repo.visibilidade === 'publico' ? '🌍 Público' : '🔒 Privado'}
-                      </span>
+                      <div className="badges">
+                        <span className={`visibility-badge ${repo.visibilidade}`}>
+                          {repo.visibilidade === 'publico' ? '🌍 Público' : '🔒 Privado'}
+                        </span>
+                        {getStatusBadge(repo.status)}
+                      </div>
                     </div>
                     <p className="repo-description">{repo.descricao || 'Sem descrição'}</p>
                     <div className="repo-meta">
@@ -404,9 +378,11 @@ function ArquivosAcademicos() {
                       </div>
                     )}
                     <div className="repo-actions">
-                      <button onClick={() => toggleVisibilidade(repo.id)} className="btn-toggle">
-                        {repo.visibilidade === 'publico' ? 'Tornar Privado' : 'Tornar Público'}
-                      </button>
+                      {repo.status === 'approved' && (
+                        <button onClick={() => toggleVisibilidade(repo.id)} className="btn-toggle">
+                          {repo.visibilidade === 'publico' ? 'Tornar Privado' : 'Tornar Público'}
+                        </button>
+                      )}
                       <button onClick={() => deleteRepositorio(repo.id)} className="btn-delete">
                         Excluir
                       </button>
@@ -423,7 +399,7 @@ function ArquivosAcademicos() {
             <div className="repos-grid">
               {outrosReposPublicos.length === 0 ? (
                 <div className="empty-message">
-                  <p>Nenhum repositório público disponível para esta formação.</p>
+                  <p>Nenhum repositório público aprovado disponível para esta formação.</p>
                 </div>
               ) : (
                 outrosReposPublicos.map(repo => (
