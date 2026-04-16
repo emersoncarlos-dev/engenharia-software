@@ -1,28 +1,49 @@
+/* ========== DASHBOARD - ESTILOS BASE ========== */
 .dashboard {
   min-height: 100vh;
   background: #f5f7fa;
   font-family: 'Inter', sans-serif;
 }
 
+/* Cabeçalho principal */
 .dashboard-header {
   background: white;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   border-bottom: 1px solid #e2e8f0;
+  position: relative;
 }
 
-.logo-area .institution {
+/* Área da logo */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 2rem;
+}
+
+.logo-icon {
+  height: 35px;
+  width: auto;
+  object-fit: contain;
+}
+
+.institution {
   font-size: 1.5rem;
   font-weight: 800;
   color: #146b9e;
 }
 
+/* Navegação principal */
 .dashboard-nav {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .dashboard-nav a {
@@ -37,214 +58,7 @@
   color: #146b9e;
 }
 
-.dashboard-main {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
-
-.welcome-card {
-  background: white;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.course-info h2 {
-  font-size: 1.5rem;
-  color: #0c2e42;
-  margin: 0;
-}
-
-.user-greeting {
-  text-align: right;
-}
-
-.user-greeting p {
-  margin: 0.25rem 0;
-  color: #4a6a82;
-}
-
-.tour-button {
-  background: #146b9e;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 2rem;
-  font-weight: 600;
-  margin-top: 0.5rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.tour-button:hover {
-  background: #0f557f;
-}
-
-.periods {
-  display: flex;
-  gap: 11.3rem;
-  flex-wrap: wrap;
-}
-
-.period {
-  background: white;
-  border: 1px solid #cbd5e1;
-  padding: 0.6rem 1.2rem;
-  border-radius: 2rem;
-  font-weight: 500;
-  color: #2c4b66;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.period:hover {
-  border-color: #146b9e;
-  color: #146b9e;
-}
-
-.period.active {
-  background: #146b9e;
-  color: white;
-  border-color: #146b9e;
-}
-
-@media (max-width: 768px) {
-  .dashboard-header {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-  }
-  .dashboard-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .welcome-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .user-greeting {
-    text-align: center;
-  }
-}
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo-icon {
-  height: 35px;      /* ajuste conforme necessário */
-  width: auto;
-  object-fit: contain;
-}
-
-.institution {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #146b9e;
-}
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-right: 2rem;   /* aumenta o espaço entre logo e menu */
-}
-
-.user-menu {
-  position: relative;
-  cursor: pointer;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: #f8fafc;
-  border-radius: 2rem;
-  transition: background 0.2s;
-}
-
-.user-info:hover {
-  background: #eef2f9;
-}
-
-.user-name {
-  font-weight: 600;
-  color: #2c4b66;
-  font-size: 0.9rem;
-}
-
-.user-id {
-  font-size: 0.8rem;
-  color: #6b89a0;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.dropdown-arrow {
-  font-size: 0.8rem;
-  color: #6b89a0;
-  transition: transform 0.2s;
-}
-
-.dropdown-arrow.open {
-  transform: rotate(180deg);
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 120px;
-  z-index: 100;
-  overflow: hidden;
-}
-
-.dropdown-item {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: #2c4b66;
-  transition: background 0.2s;
-}
-
-.dropdown-item:hover {
-  background: #f1f5f9;
-}
-
-/* Ajuste no header para posicionar o user-menu à direita */
-.dashboard-header {
-  background: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border-bottom: 1px solid #e2e8f0;
-  position: relative;
-}
-
-/* Menu do usuário */
+/* Menu do usuário (dropdown) */
 .user-menu {
   position: relative;
   margin-left: auto;
@@ -334,18 +148,245 @@
   color: #146b9e;
 }
 
-/* Responsividade */
+/* Conteúdo principal */
+.dashboard-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+/* Card de boas-vindas */
+.welcome-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.course-info h2 {
+  font-size: 1.5rem;
+  color: #0c2e42;
+  margin: 0;
+}
+
+.user-greeting {
+  text-align: right;
+}
+
+.user-greeting p {
+  margin: 0.25rem 0;
+  color: #4a6a82;
+}
+
+.tour-button {
+  background: #146b9e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tour-button:hover {
+  background: #0f557f;
+}
+
+/* Períodos (semestres) */
+.periods {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.period {
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  color: #2c4b66;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.period:hover {
+  border-color: #146b9e;
+  color: #146b9e;
+}
+
+.period.active {
+  background: #146b9e;
+  color: white;
+  border-color: #146b9e;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+
+/* Tablets e smartphones médios (max-width: 1024px) */
 @media (max-width: 1024px) {
   .dashboard-header {
     flex-direction: column;
     align-items: stretch;
+    padding: 1rem;
   }
   .user-menu {
     margin-left: 0;
     align-self: flex-end;
   }
   .dashboard-nav {
-    flex-wrap: wrap;
     justify-content: center;
+  }
+}
+
+/* Smartphones (max-width: 768px) */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  .logo-area {
+    margin-right: 0;
+    justify-content: center;
+  }
+
+  .logo-icon {
+    height: 28px;
+  }
+
+  .institution {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-nav {
+    gap: 0.8rem;
+  }
+
+  .dashboard-nav a {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .user-button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .user-icon {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-main {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .course-info h2 {
+    font-size: 1.2rem;
+  }
+
+  .user-greeting {
+    text-align: center;
+  }
+
+  .tour-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .periods {
+    gap: 0.6rem;
+    justify-content: center;
+  }
+
+  .period {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Smartphones pequenos (max-width: 480px) */
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 0.6rem;
+  }
+
+  .logo-icon {
+    height: 24px;
+  }
+
+  .institution {
+    font-size: 1rem;
+  }
+
+  .dashboard-nav {
+    gap: 0.5rem;
+  }
+
+  .dashboard-nav a {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .user-button {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .dropdown-menu {
+    min-width: 180px;
+    right: -10px;
+  }
+
+  .welcome-card {
+    padding: 0.8rem;
+  }
+
+  .course-info h2 {
+    font-size: 1rem;
+  }
+
+  .user-greeting p {
+    font-size: 0.85rem;
+  }
+
+  .tour-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .periods {
+    gap: 0.4rem;
+  }
+
+  .period {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Telas muito estreitas (max-width: 360px) */
+@media (max-width: 360px) {
+  .dashboard-nav a {
+    font-size: 0.65rem;
+  }
+  .period {
+    font-size: 0.65rem;
   }
 }

@@ -21,11 +21,17 @@ function CoordenadorRepositorios() {
 
   const pendentes = repositorios.filter(repo => repo.status === 'pending');
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
+
   return (
     <div className="coordenador-container">
       <header className="coordenador-header">
-        <button className="back-button" onClick={() => navigate('/dashboard')}>← Voltar</button>
+        
         <h1>Área do Coordenador – Repositórios Pendentes</h1>
+        <button className="logout-button" onClick={handleLogout}>Sair</button>
       </header>
 
       <div className="repos-list">
@@ -57,4 +63,5 @@ function CoordenadorRepositorios() {
     </div>
   );
 }
+
 export default CoordenadorRepositorios;
